@@ -17,8 +17,6 @@ contract LSD is ERC20, IERC4626, Ownable {
     event LeverageStakingYieldToggle(bool toggleStatus);
     event BorrowPercentageChange(uint8 updatedPercentage);
 
-    mapping(address => uint256) public invested;
-
     IChildPool immutable stader;
     AggregatorV3Interface immutable priceFeedMatic;
     AggregatorV3Interface immutable priceFeedMaticX;
@@ -148,7 +146,7 @@ contract LSD is ERC20, IERC4626, Ownable {
         uint256 _withdrawAssetsUSD = (_shares * _supplied) / totalSupply();
         _withdraw(_withdrawAssetsUSD);
 
-        uint256 _investedAssets = (_shares * invested[_owner]) / balanceOf(_owner);
+        uint256 _investedAssets = (_shares * totalInvested) / totalSupply();
         _burnLSD(_shares, _investedAssets, _owner);
 
         _assets = WMATIC(wMatic).balanceOf(address(this));
@@ -178,7 +176,7 @@ contract LSD is ERC20, IERC4626, Ownable {
         uint256 _withdrawAssetsUSD = (_shares * _supplied) / totalSupply();
         _withdraw(_withdrawAssetsUSD);
 
-        uint256 _investedAssets = (_shares * invested[_owner]) / balanceOf(_owner);
+        uint256 _investedAssets = (_shares * totalInvested) / totalSupply();
         _burnLSD(_shares, _investedAssets, _owner);
 
         uint256 _assets = WMATIC(wMatic).balanceOf(address(this));
@@ -386,7 +384,6 @@ contract LSD is ERC20, IERC4626, Ownable {
     function _mintLSD(uint256 _shares, uint256 _assets, address _receiver) internal {
         _mint(_receiver, _shares);
         totalInvested += _assets;
-        invested[_receiver] += _assets;
     }
 
     function _withdraw(uint256 _assetsUSD) internal {
@@ -447,6 +444,5 @@ contract LSD is ERC20, IERC4626, Ownable {
     function _burnLSD(uint256 _shares, uint256 _assets, address _owner) internal {
         _burn(_owner, _shares);
         totalInvested -= _assets;
-        invested[_owner] -= _assets;
     }
 }
