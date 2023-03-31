@@ -36,7 +36,7 @@ export const RainbowKitCustomConnectButton = () => {
                       {configuredNetwork.name}
                     </span>
                     <button className="btn btn-sm btn-error ml-2" onClick={openChainModal} type="button">
-                      <span>Wrong network</span>
+                      <span className="mr-1">Wrong network</span>
                       <ChevronDownIcon className="h-6 w-4 ml-2 sm:ml-0" />
                     </button>
                   </>
