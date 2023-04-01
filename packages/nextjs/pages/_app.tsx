@@ -8,21 +8,21 @@ import { WagmiConfig } from "wagmi";
 import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
-import { useEthPrice } from "~~/hooks/scaffold-eth";
+// import { useEthPrice } from "~~/hooks/scaffold-eth";
 import { useAppStore } from "~~/services/store/store";
 import { wagmiClient } from "~~/services/web3/wagmiClient";
 import { appChains } from "~~/services/web3/wagmiConnectors";
 import "~~/styles/globals.css";
 
 const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
-  const price = useEthPrice();
-  const setEthPrice = useAppStore(state => state.setEthPrice);
+  // const price = useEthPrice();
+  // const setEthPrice = useAppStore(state => state.setEthPrice);
 
-  useEffect(() => {
-    if (price > 0) {
-      setEthPrice(price);
-    }
-  }, [setEthPrice, price]);
+  // useEffect(() => {
+  //   if (price > 0) {
+  //     setEthPrice(price);
+  //   }
+  // }, [setEthPrice, price]);
 
   return (
     <WagmiConfig client={wagmiClient}>
