@@ -25,13 +25,14 @@ const deployLSD: DeployFunction = async function (hre: HardhatRuntimeEnvironment
         ],
         log: true,
         autoMine: true,
+        value: hre.ethers.utils.parseEther("1"),
         // waitConfirmations: 5,
     });
 
     const lsd = await hre.ethers.getContract("LSD", deployer);
 
     if ((await hre.getChainId()) == "31337") {
-        await lsd.transferOwnership("0x662C2e2F9C98150C20DDCe35df42f17b11C671df");
+        // await lsd.transferOwnership("0x662C2e2F9C98150C20DDCe35df42f17b11C671df");
     }
 
     if ((await hre.getChainId()) != "31337") {

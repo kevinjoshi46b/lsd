@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import { ethers } from "ethers";
 import type { NextPage } from "next";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 const VaultStats: NextPage = () => {
@@ -14,11 +15,6 @@ const VaultStats: NextPage = () => {
     contractName: "LSD",
     functionName: "totalAssets",
   });
-
-  // const { data: aPY } = useScaffoldContractRead({
-  //   contractName: "LSD",
-  //   functionName: "",
-  // });
 
   const { data: cost } = useScaffoldContractRead({
     contractName: "LSD",
@@ -71,8 +67,6 @@ const VaultStats: NextPage = () => {
     let profit = Number(ethers.utils.formatEther(currentAmount));
     return ((profit - base) * 100) / base;
   };
-
-  // const formatAPY = () => {};
 
   const formatSupplied = () => {
     let m = ethers.utils.parseEther("1");
@@ -153,8 +147,18 @@ const VaultStats: NextPage = () => {
         <div className="flex flex-row flex-wrap">
           <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
-              <span className="text-3xl">6.23%</span>
-              <span className="mt-2">Current APY</span>
+              <span className="text-3xl">~ 6%</span>
+              <div className="flex flex-row">
+                <span className="mt-2">APY</span>
+                <div
+                  className="tooltip tooltip-secondary mt-2 ml-2"
+                  data-tip="This is a hardcoded APY value based on the liquid and leverage staking derivate as of building this project. This will be updated with auto calculation of APY in some time!"
+                >
+                  <button>
+                    <InformationCircleIcon className="h-4 w-4 mr-0.5 mt-1" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div className="card bg-base-100 shadow-xl flex-1 m-4">

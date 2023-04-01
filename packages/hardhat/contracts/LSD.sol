@@ -32,6 +32,7 @@ contract LSD is ERC20, IERC4626, Ownable {
     bool public leverageStakingYieldToggle;
     uint8 public borrowPercentage;
     uint256 public totalInvested;
+    uint256 public deployTime;
 
     constructor(
         string memory _name,
@@ -48,7 +49,9 @@ contract LSD is ERC20, IERC4626, Ownable {
         address _maticX,
         address _aPolMATICX,
         bytes32 _balancerPool
-    ) ERC20(_name, _symbol) {
+    ) payable ERC20(_name, _symbol) {
+        require(msg.value == 1 ether, "Send exactly 1 matic during deployement!");
+
         leverageStakingYieldToggle = _leverageStakingYieldToggle;
         borrowPercentage = _borrowPercentage;
 
@@ -63,11 +66,19 @@ contract LSD is ERC20, IERC4626, Ownable {
         wMatic = _wMatic;
         maticX = _maticX;
         balancerPool = _balancerPool;
+        deployTime = block.timestamp * (10 ** 18);
 
         IERC20(_maticX).approve(_aave, type(uint256).max);
         IERC20(_maticX).approve(_balancer, type(uint256).max);
         WMATIC(_wMatic).approve(_aave, type(uint256).max);
         IERC20(_aPolMATICX).approve(_aave, type(uint256).max);
+
+        uint256 _assets = 10 ** 18;
+        _wrap(_assets);
+        uint256 _shares = _convertToShares(_assets);
+        _deposit(_assets);
+        _mintLSD(_shares, _assets, msg.sender);
+        emit Deposit(msg.sender, msg.sender, _assets, _shares);
     }
 
     // ERC4626 FUNCTIONS
