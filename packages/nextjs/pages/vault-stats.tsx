@@ -109,7 +109,7 @@ const VaultStats: NextPage = () => {
 
       <div className="flex flex-col mt-8">
         <div className="flex flex-row flex-wrap">
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-5xl">
                 {invested == undefined ? (
@@ -123,7 +123,7 @@ const VaultStats: NextPage = () => {
               <span className="mt-11">WMatic Deposited</span>
             </div>
           </div>
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-5xl">
                 {currentAmount == undefined ? (
@@ -151,13 +151,13 @@ const VaultStats: NextPage = () => {
           </div>
         </div>
         <div className="flex flex-row flex-wrap">
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-3xl">6.23%</span>
               <span className="mt-2">Current APY</span>
             </div>
           </div>
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-3xl">
                 {cost == undefined ? (
@@ -173,7 +173,7 @@ const VaultStats: NextPage = () => {
           </div>
         </div>
         <div className="flex flex-row flex-wrap">
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-2xl">
                 {balance == undefined ? (
@@ -187,7 +187,7 @@ const VaultStats: NextPage = () => {
               <span className="mt-2">Issued LSD</span>
             </div>
           </div>
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               {leverageStakingToggle == undefined ? (
                 <button className="btn btn-ghost loading"></button>
@@ -199,7 +199,7 @@ const VaultStats: NextPage = () => {
               <span className="mt-2">Leverage Staking</span>
             </div>
           </div>
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-2xl">
                 {borrowPercentage == undefined ? <button className="btn btn-ghost loading"></button> : borrowPercentage}
@@ -210,7 +210,7 @@ const VaultStats: NextPage = () => {
           </div>
         </div>
         <div className="flex flex-row flex-wrap">
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-2xl">
                 {aave == undefined || maticXPrice == undefined ? (
@@ -224,7 +224,7 @@ const VaultStats: NextPage = () => {
               <span className="mt-1">Supplied MaticX To Aave</span>
             </div>
           </div>
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-2xl">
                 {aave == undefined || maticPrice == undefined ? (
@@ -238,7 +238,7 @@ const VaultStats: NextPage = () => {
               <span className="mt-1">Borrowed WMatic From Aave</span>
             </div>
           </div>
-          <div className="card bg-base-100 shadow-xl grow m-4">
+          <div className="card bg-base-100 shadow-xl flex-1 m-4">
             <div className="flex flex-col items-center card-body p-6 pb-4">
               <span className="text-2xl">
                 {aave == undefined ? (
