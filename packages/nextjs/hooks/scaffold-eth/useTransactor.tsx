@@ -91,7 +91,8 @@ export const useTransactor = (_signer?: Signer): TTransactionFunc => {
       // TODO handle error properly
       console.error("⚡️ ~ file: useTransactor.ts ~ error", error);
       const message = getParsedEthersError(error);
-      notification.error(message);
+      console.log(message);
+      notification.error("Oops something went wrong! Check console for more details");
     }
 
     return transactionResponse;
