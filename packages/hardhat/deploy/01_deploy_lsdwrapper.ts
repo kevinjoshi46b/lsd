@@ -12,17 +12,7 @@ const deployLSDWrapper: DeployFunction = async function (hre: HardhatRuntimeEnvi
         args: [lsd.address, "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"],
         log: true,
         autoMine: true,
-        // waitConfirmations: 5,
     });
-
-    const lsdWrapper = await hre.ethers.getContract("LSDWrapper", deployer);
-
-    if ((await hre.getChainId()) != "31337") {
-        await hre.run("verify:verify", {
-            address: lsdWrapper.address,
-            arguments: [lsd.address, "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"],
-        });
-    }
 };
 
 export default deployLSDWrapper;
