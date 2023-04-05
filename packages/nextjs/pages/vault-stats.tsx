@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Head from "next/head";
 import { ethers } from "ethers";
 import type { NextPage } from "next";
@@ -53,8 +52,8 @@ const VaultStats: NextPage = () => {
   });
 
   const customFormatEther = (x: any) => {
-    let value = ethers.utils.formatEther(x);
-    let digits = parseInt(value).toString().length;
+    const value = ethers.utils.formatEther(x);
+    const digits = parseInt(value).toString().length;
     if (digits >= 7) {
       return [value, Number(value).toFixed(0)];
     } else {
@@ -63,15 +62,15 @@ const VaultStats: NextPage = () => {
   };
 
   const currentAmountPercentage = () => {
-    let base = Number(ethers.utils.formatEther(invested));
-    let profit = Number(ethers.utils.formatEther(currentAmount));
+    const base = Number(ethers.utils.formatEther(invested));
+    const profit = Number(ethers.utils.formatEther(currentAmount));
     return ((profit - base) * 100) / base;
   };
 
   const formatSupplied = () => {
-    let m = ethers.utils.parseEther("1");
-    let value = ethers.utils.formatEther(aave[0].mul(m).div(maticXPrice[1]));
-    let digits = parseInt(value).toString().length;
+    const m = ethers.utils.parseEther("1");
+    const value = ethers.utils.formatEther(aave[0].mul(m).div(maticXPrice[1]));
+    const digits = parseInt(value).toString().length;
     if (digits >= 7) {
       return [value, Number(value).toFixed(0)];
     } else {
@@ -80,9 +79,9 @@ const VaultStats: NextPage = () => {
   };
 
   const formatBorrowed = () => {
-    let m = ethers.utils.parseEther("1");
-    let value = ethers.utils.formatEther(aave[1].mul(m).div(maticPrice[1]));
-    let digits = parseInt(value).toString().length;
+    const m = ethers.utils.parseEther("1");
+    const value = ethers.utils.formatEther(aave[1].mul(m).div(maticPrice[1]));
+    const digits = parseInt(value).toString().length;
     if (digits >= 7) {
       return [value, Number(value).toFixed(0)];
     } else {
