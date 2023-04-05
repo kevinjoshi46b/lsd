@@ -267,7 +267,7 @@ const Home: NextPage = () => {
                       {depositOption == 0 ? "WMatic" : "Matic"} <ChevronDownIcon className="h-4 w-4 ml-1.5" />
                     </div>
                   </label>
-                  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-secondary rounded-box w-52">
+                  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-52">
                     <li>
                       <a onClick={() => setDepositOption(0)}>WMatic</a>
                     </li>

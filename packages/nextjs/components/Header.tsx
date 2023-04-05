@@ -14,9 +14,7 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
     <Link
       href={href}
       passHref
-      className={`${
-        isActive ? "bg-primary shadow-md" : ""
-      } hover:bg-primary hover:shadow-md focus:bg-primary py-1.5 px-3 text-sm rounded-full gap-2`}
+      className={`${isActive ? "tab-active font-medium" : ""} tab py-1.5 px-3 text-sm rounded-full gap-2`}
     >
       {children}
     </Link>
@@ -36,12 +34,12 @@ export const Header = () => {
 
   const navLinks = (
     <>
-      <li>
+      <li className="content-start">
         <NavLink href="/">
           <HomeIcon className="h-4 w-4" /> Home
         </NavLink>
       </li>
-      <li>
+      <li className="content-start">
         <NavLink href="/vault-stats">
           <LockClosedIcon className="h-4 w-4" />
           Vault Stats
@@ -84,7 +82,7 @@ export const Header = () => {
             <span className="font-bold text-2xl ml-1 mr-4 mb-1">LSD</span>
           </div>
         </div>
-        <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">{navLinks}</ul>
+        <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2 tabs tabs-boxed">{navLinks}</ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
         <RainbowKitCustomConnectButton />
