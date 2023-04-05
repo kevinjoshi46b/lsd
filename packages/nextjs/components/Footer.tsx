@@ -40,7 +40,16 @@ export const Footer = () => {
               >
                 Scaffold-Eth 2
               </a>
-              🏗
+              🏗 |{" "}
+              <a
+                href="https://github.com/kevinjoshi46b/lsd"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-2"
+              >
+                Source Code
+              </a>
+              📝
             </div>
           </div>
         </ul>
