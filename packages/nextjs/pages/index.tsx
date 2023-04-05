@@ -98,7 +98,7 @@ const Home: NextPage = () => {
 
   const setCustomSlippage = (e: any) => {
     if (e.target.value == "" || Number(e.target.value) > 100) {
-      setSlippage(0.5);
+      setSlippage(0);
     } else {
       setSlippage(Number(Number(e.target.value).toFixed(2)));
     }
@@ -455,8 +455,8 @@ const Home: NextPage = () => {
           </div>
           {/* Tab 2 */}
           <div className={`card-body px-6 pt-0 pb-6 ${tabOption == 2 ? "" : "hidden"}`}>
-            <h2 className="card-title text-lg ml-2">SLIPPAGE %</h2>
-            <div className="flex flex-overflow justify-around">
+            <h2 className="card-title text-2xl ml-2 mb-0">SLIPPAGE %</h2>
+            <div className="flex flex-overflow justify-around items-end">
               {slippage == 0.5 ? (
                 <button className="btn btn-primary py-1.5 px-6">0.5</button>
               ) : (
@@ -472,27 +472,37 @@ const Home: NextPage = () => {
                 </button>
               )}
               {slippage != 0.5 && slippage != 1 ? (
-                <input
-                  type="number"
-                  step="0.01"
-                  placeholder="Custom"
-                  className="input input-bordered input-primary w-full max-w-xs ml-3"
-                  value={slippage}
-                  onChange={e => {
-                    setCustomSlippage(e);
-                  }}
-                />
+                <div className="form-control w-full max-w-xs">
+                  <label className="label pt-0">
+                    <span className="label-text pl-4">CUSTOM:</span>
+                  </label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    placeholder="Custom"
+                    className="input input-bordered input-primary w-full max-w-xs ml-3"
+                    value={slippage}
+                    onChange={e => {
+                      setCustomSlippage(e);
+                    }}
+                  />
+                </div>
               ) : (
-                <input
-                  type="number"
-                  step="0.01"
-                  placeholder="Custom"
-                  className="input input-bordered input-secondary w-full max-w-xs ml-3"
-                  value={slippage}
-                  onChange={e => {
-                    setCustomSlippage(e);
-                  }}
-                />
+                <div className="form-control w-full max-w-xs">
+                  <label className="label pt-0">
+                    <span className="label-text pl-4">CUSTOM:</span>
+                  </label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    placeholder="Custom"
+                    className="input input-bordered input-secondary w-full max-w-xs ml-3"
+                    value={slippage}
+                    onChange={e => {
+                      setCustomSlippage(e);
+                    }}
+                  />
+                </div>
               )}
             </div>
           </div>
