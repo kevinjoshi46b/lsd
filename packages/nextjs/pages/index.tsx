@@ -21,6 +21,7 @@ const Home: NextPage = () => {
   const [depositValue, setDepositValue] = useState(0);
   const [minimumReceiveLSDActual, setMinimumReceiveLSDActual] = useState("0");
   const [minimumReceiveLSD, setMinimumReceiveLSD] = useState("0");
+  const [hideButton, setHideButton] = useState(true);
 
   const writeDisabled = !chain || chain?.id !== getTargetNetwork().id;
 
@@ -124,6 +125,12 @@ const Home: NextPage = () => {
       .then(address => window.ethereum.request({ method: "wallet_watchAsset", params: { ...tokenInfo, address } }))
       .catch(error => console.error(error));
   };
+
+  useEffect(() => {
+    if (window.ethereum) {
+      setHideButton(false);
+    }
+  }, []);
 
   // Tab 1
 
@@ -315,7 +322,10 @@ const Home: NextPage = () => {
                   )}{" "}
                   LSD
                 </p>
-                <button className="btn btn-secondary btn-xs" onClick={addTokenToWallet}>
+                <button
+                  className={`btn btn-secondary btn-xs ${hideButton || writeDisabled ? "hidden" : ""}`}
+                  onClick={addTokenToWallet}
+                >
                   <WalletIcon className="h-4 w-4 mr-2" /> Add LSD
                 </button>
               </div>
