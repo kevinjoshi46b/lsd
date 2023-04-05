@@ -5,7 +5,7 @@ import { ethers } from "ethers";
 import type { NextPage } from "next";
 import { useAccount, useNetwork } from "wagmi";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import { Cog6ToothIcon, WalletIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon, Cog6ToothIcon, WalletIcon } from "@heroicons/react/24/solid";
 import { useAccountBalance, useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import scaffoldConfig from "~~/scaffold.config";
 import { getTargetNetwork } from "~~/utils/scaffold-eth";
@@ -13,14 +13,14 @@ import { contracts } from "~~/utils/scaffold-eth/contract";
 
 const Home: NextPage = () => {
   const { chain } = useNetwork();
+  const { address } = useAccount();
+  const { balance } = useAccountBalance(address);
   const [tabOption, setTabOption] = useState(0);
   const [slippage, setSlippage] = useState(0.5);
   const [depositOption, setDepositOption] = useState(0);
   const [depositValue, setDepositValue] = useState(0);
   const [minimumReceiveLSDActual, setMinimumReceiveLSDActual] = useState("0");
   const [minimumReceiveLSD, setMinimumReceiveLSD] = useState("0");
-  const { address, connector, isConnected } = useAccount();
-  const { balance, price, isError, isLoading, onToggleBalance, isEthBalance } = useAccountBalance(address);
 
   const writeDisabled = !chain || chain?.id !== getTargetNetwork().id;
 
@@ -79,8 +79,8 @@ const Home: NextPage = () => {
   }, [slippage, receiveLSD]);
 
   const customFormatEther = (x: any) => {
-    let value = ethers.utils.formatEther(x);
-    let digits = parseInt(value).toString().length;
+    const value = ethers.utils.formatEther(x);
+    const digits = parseInt(value).toString().length;
     if (digits >= 7) {
       return [value, Number(value).toFixed(0)];
     } else {
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
 
   const minimumCalculator = (x: any) => {
     x = x.sub(x.mul(ethers.utils.parseEther((slippage * 100).toString())).div(ethers.utils.parseEther("10000")));
-    let data = customFormatEther(x);
+    const data = customFormatEther(x);
     setMinimumReceiveLSDActual(data[0]);
     setMinimumReceiveLSD(data[1]);
   };
@@ -103,9 +103,31 @@ const Home: NextPage = () => {
     }
   };
 
+  const router = useRouter();
+
+  const addTokenToWallet = () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const tokenInfo = {
+      type: "ERC20",
+      options: {
+        address: contracts[scaffoldConfig.targetNetwork.id][0]["contracts"]["LSD"]["address"],
+        symbol: "LSD",
+        decimals: 18,
+        image: `${window.location.origin}${router.pathname}lsd_logo.png`,
+      },
+    };
+
+    signer
+      .getAddress()
+      .then(address => window.ethereum.request({ method: "wallet_watchAsset", params: { ...tokenInfo, address } }))
+      .catch(error => console.error(error));
+  };
+
   // Tab 1
 
-  const [redeemValue, setRedeemValue] = useState(0);
+  const [redeemValue, setRedeemValue] = useState("0");
   const [unwrap, setUnwrap] = useState(false);
   const [minimumReceiveWMaticActual, setMinimumReceiveWMaticActual] = useState("0");
   const [minimumReceiveWMatic, setMinimumReceiveWMatic] = useState("0");
@@ -169,36 +191,9 @@ const Home: NextPage = () => {
 
   const minimumCalculator2 = (x: any) => {
     x = x.sub(x.mul(ethers.utils.parseEther((slippage * 100).toString())).div(ethers.utils.parseEther("10000")));
-    let data = customFormatEther(x);
+    const data = customFormatEther(x);
     setMinimumReceiveWMaticActual(data[0]);
     setMinimumReceiveWMatic(data[1]);
-  };
-
-  const router = useRouter();
-
-  const addTokenToWallet = () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const tokenContract = new ethers.Contract(
-      contracts[scaffoldConfig.targetNetwork.id][0]["contracts"]["LSD"]["address"],
-      contracts[scaffoldConfig.targetNetwork.id][0]["contracts"]["LSDWrapper"]["abi"],
-      signer,
-    );
-
-    const tokenInfo = {
-      type: "ERC20",
-      options: {
-        address: contracts[scaffoldConfig.targetNetwork.id][0]["contracts"]["LSD"]["address"],
-        symbol: "LSD",
-        decimals: 18,
-        image: `${window.location.origin}${router.pathname}lsd_logo.png`,
-      },
-    };
-
-    signer
-      .getAddress()
-      .then(address => window.ethereum.request({ method: "wallet_watchAsset", params: { ...tokenInfo, address } }))
-      .catch(error => console.error(error));
   };
 
   return (
@@ -253,7 +248,7 @@ const Home: NextPage = () => {
                 <input
                   type="number"
                   placeholder="Deposit amount"
-                  className="input input-bordered input-primary grow"
+                  className="input input-bordered input-primary grow min-w-0"
                   value={depositValue}
                   onChange={e => {
                     setDepositValue(e.target.value);
@@ -261,9 +256,11 @@ const Home: NextPage = () => {
                 />
                 <div className="dropdown dropdown-hover dropdown-end">
                   <label tabIndex={0} className="btn btn-secondary ml-2">
-                    {depositOption == 0 ? "WMatic" : "Matic"}
+                    <div className="flex flex-row">
+                      {depositOption == 0 ? "WMatic" : "Matic"} <ChevronDownIcon className="h-4 w-4 ml-1.5" />
+                    </div>
                   </label>
-                  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-secondary rounded-box w-52">
                     <li>
                       <a onClick={() => setDepositOption(0)}>WMatic</a>
                     </li>
