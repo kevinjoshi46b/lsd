@@ -1527,7 +1527,7 @@ export default {
       chainId: "31337",
       contracts: {
         LSD: {
-          address: "0xDFF3455E08AB33B1599D1c5B5A1D65de63d3FCd0",
+          address: "0xC792B805c14a4BfD776592AC63e6068b54299f27",
           abi: [
             {
               inputs: [
@@ -1767,29 +1767,6 @@ export default {
               ],
               name: "Withdraw",
               type: "event",
-            },
-            {
-              inputs: [],
-              name: "APYData",
-              outputs: [
-                {
-                  internalType: "uint256",
-                  name: "currentTime",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
-                  name: "deployTime",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
-                  name: "currentValue",
-                  type: "uint256",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
             },
             {
               inputs: [
@@ -2581,7 +2558,7 @@ export default {
           ],
         },
         LSDWrapper: {
-          address: "0xFAE6fA2097792Edfd7429A282F21ec2D955279D9",
+          address: "0xA9bFfeCa653Dac018280107e3C8021568b98B841",
           abi: [
             {
               inputs: [
