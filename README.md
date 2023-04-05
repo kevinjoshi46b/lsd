@@ -2,6 +2,4 @@
 
 LSD is a liquid staking and leverage staking based yield generating vault. You can deposit your matic and receive LSD tokens which will appreciate in value w.r.t. matic over time 📈   
   
-To know more check this video out ⬇️  
-  
-Introducing LSD 💊  
+To know more check this video out [Youtube: Introducing LSD 💊](https://youtu.be/m34_71wfruw)  
