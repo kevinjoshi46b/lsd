@@ -19,7 +19,7 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
 
   useEffect(() => {
     setIsDarkTheme(isDarkMode);
-  }, []);
+  }, [isDarkMode]);
 
   return (
     <WagmiConfig client={wagmiClient}>
