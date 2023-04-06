@@ -269,10 +269,14 @@ const Home: NextPage = () => {
                   </label>
                   <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-52">
                     <li>
-                      <a onClick={() => setDepositOption(0)}>WMatic</a>
+                      <a className="active:bg-secondary" onClick={() => setDepositOption(0)}>
+                        WMatic
+                      </a>
                     </li>
                     <li>
-                      <a onClick={() => setDepositOption(1)}>Matic</a>
+                      <a className="active:bg-secondary" onClick={() => setDepositOption(1)}>
+                        Matic
+                      </a>
                     </li>
                   </ul>
                 </div>
