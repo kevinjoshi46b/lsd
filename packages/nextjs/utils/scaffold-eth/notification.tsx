@@ -49,11 +49,11 @@ const Notification = ({
   return toast.custom(
     t => (
       <div
-        className={`flex flex-row items-center justify-between max-w-sm bg-base-200 p-4 shadow-2xl hover:shadow-none transform-gpu translate-y-0 hover:translate-y-1 rounded-md relative transition-all duration-500 ease-in-out space-x-2 ${
+        className={`flex flex-row items-start justify-between max-w-sm bg-base-200 p-4 shadow-2xl hover:shadow-none transform-gpu translate-y-0 hover:translate-y-1 rounded-md relative transition-all duration-500 ease-in-out space-x-2 ${
           t.visible ? "top-0" : "-top-96"
         }`}
       >
-        <div className="text-2xl self-start mb-0 mt-0">{icon ? icon : ENUM_STATUSES[status]}</div>
+        <div className="text-2xl self-start mb-0 mt-0 mr-1">{icon ? icon : ENUM_STATUSES[status]}</div>
         <div className="mt-0 break-all">{content}</div>
 
         <div className="cursor-pointer text-lg" onClick={() => toast.dismiss(t.id)}>
