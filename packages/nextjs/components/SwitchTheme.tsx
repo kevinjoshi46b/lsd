@@ -7,8 +7,8 @@ export const SwitchTheme = ({ className }: { className?: string }) => {
   const isMounted = useIsMounted();
 
   useEffect(() => {
-    const body = document.body;
-    body.setAttribute("data-theme", isDarkMode ? "scaffoldEthDark" : "scaffoldEth");
+    const doc = document.documentElement;
+    doc.setAttribute("data-theme", isDarkMode ? "scaffoldEthDark" : "scaffoldEth");
   }, [isDarkMode]);
 
   return (
