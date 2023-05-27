@@ -25,8 +25,7 @@ yarn start
 
 1. Clone the repository
 2. In the [scaffold.config.ts](packages/nextjs/scaffold.config.ts) file change the `targetNetwork` property to `chains.hardhat`
-3. Create .env file based on the .env.example file in [hardhat folder](packages/hardhat/)
-4. Run the following command from the root of the project
+3. Run the following command from the root of the project
 
 ```bash
 yarn install
@@ -34,6 +33,10 @@ yarn install
 
 ```bash
 yarn fork
+```
+
+```bash
+yarn deploy
 ```
 
 ```bash
